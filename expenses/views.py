@@ -21,7 +21,12 @@ class ExpenseListView(ListView):
             # getting values from from_date and to_date in input fields
             from_date = form['from_date'].value()
             to_date = form['to_date'].value()
+
+            # getting value of categories
             categories = form.cleaned_data.get('categories', '')
+
+            # getting value of ordering_by
+            ordering_by = form['ordering_by'].value()
             
             if categories:
                 categories=categories
@@ -50,6 +55,10 @@ class ExpenseListView(ListView):
                     ],
                     category__in = categories
                 )
+            
+            if ordering_by:
+                queryset = queryset.order_by(ordering_by)
+                print(queryset)
 
         return super().get_context_data(
             form=form,
