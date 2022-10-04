@@ -4,6 +4,8 @@ from .forms import ExpenseSearchForm
 from .models import Expense, Category
 from .reports import summary_per_category, summary_per_period
 from datetime import date
+from django.db.models import Count
+import re
 
 
 class ExpenseListView(ListView):
@@ -68,7 +70,6 @@ class ExpenseListView(ListView):
             total_value = sum([expense.amount for expense in Expense.objects.all()])
 
 
-
         return super().get_context_data(
             form=form,
             object_list=queryset,
@@ -78,8 +79,22 @@ class ExpenseListView(ListView):
             total_value=total_value,
             **kwargs
             )
+            
+    # fixing issues with pagination and filtering
+    def setup(self, request, *args, **kwargs) -> None:
+        request.GET.get("page")
+        request.META["QUERY_STRING"] = re.sub("(&|\?)page=(.)*", "", request.META.get("QUERY_STRING", ""))
+        return super().setup(request, *args, **kwargs)
 
 class CategoryListView(ListView):
     model = Category
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        queryset = object_list if object_list is not None else self.object_list
+
+        queryset = queryset.annotate(items_count=Count('expense__category'))
+
+        return super().get_context_data(   
+                object_list=queryset
+                )
