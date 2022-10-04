@@ -2,7 +2,7 @@ from django.views.generic.list import ListView
 
 from .forms import ExpenseSearchForm
 from .models import Expense, Category
-from .reports import summary_per_category
+from .reports import summary_per_category, summary_per_period
 from datetime import date
 
 
@@ -73,6 +73,7 @@ class ExpenseListView(ListView):
             form=form,
             object_list=queryset,
             summary_per_category=summary_per_category(queryset),
+            summary_per_period=summary_per_period(queryset),
             subtotal_value=subtotal_value,
             total_value=total_value,
             **kwargs
