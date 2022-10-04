@@ -1,18 +1,19 @@
 from django import forms
 from .models import Expense, Category
 
-# fetching choices from the Category db
-CATEGORY_CHOICES = ((category.id, category.name) for category in Category.objects.all())
 
-ORDERING_CHOICES = (
+class ExpenseSearchForm(forms.ModelForm):
+    # fetching choices from the Category db
+    CATEGORY_CHOICES = ((category.id, category.name) for category in Category.objects.all())
+
+    ORDERING_CHOICES = (
     ('',''),
     ('date', 'By date: ascending'),
     ('-date', 'By date: descending'),
     ('category', 'By category: ascending'),
     ('-category', 'By category: descending'),
-)
+    )
 
-class ExpenseSearchForm(forms.ModelForm):
     from_date = forms.DateTimeField(required=False)
     to_date = forms.DateTimeField(required=False)
 
