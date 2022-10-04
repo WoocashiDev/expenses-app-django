@@ -56,15 +56,27 @@ class ExpenseListView(ListView):
                     category__in = categories
                 )
             
+            # ordering queryset if applicable
             if ordering_by:
                 queryset = queryset.order_by(ordering_by)
                 print(queryset)
+
+            # subtotal value - value as per search results
+            subtotal_value = sum([expense.amount for expense in queryset])
+
+            # total value - value as per all registered expenses
+            total_value = sum([expense.amount for expense in Expense.objects.all()])
+
+
 
         return super().get_context_data(
             form=form,
             object_list=queryset,
             summary_per_category=summary_per_category(queryset),
-            **kwargs)
+            subtotal_value=subtotal_value,
+            total_value=total_value,
+            **kwargs
+            )
 
 class CategoryListView(ListView):
     model = Category

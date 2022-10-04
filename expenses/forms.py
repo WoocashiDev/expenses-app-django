@@ -6,10 +6,10 @@ CATEGORY_CHOICES = ((category.id, category.name) for category in Category.object
 
 ORDERING_CHOICES = (
     ('',''),
-    ('-date', 'By date: ascending'),
-    ('date', 'By date: descending'),
-    ('-category', 'By category: asceding'),
-    ('category', 'By category: desceding'),
+    ('date', 'By date: ascending'),
+    ('-date', 'By date: descending'),
+    ('category', 'By category: ascending'),
+    ('-category', 'By category: descending'),
 )
 
 class ExpenseSearchForm(forms.ModelForm):
