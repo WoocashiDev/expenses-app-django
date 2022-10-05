@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'expenses:category-create' %}">add</a>
+<div class="row d-flex justify-content-center mt-5 mb-5">
+	<div class="col-6">
 
-<table border="1">
+<h3>Categories <a class="ms-3 btn btn-primary" href="{% url 'expenses:category-create' %}">Add new</a></h3>
+<hr>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>name</th>
@@ -21,12 +24,15 @@
 				{{obj.items_count}}
 			</td>
 			<td>
-				<a href="{% url 'expenses:category-edit' obj.id %}">edit</a>
-				<a href="{% url 'expenses:category-delete' obj.id %}">delete</a>
+				<a class="btn btn-success" href="{% url 'expenses:category-edit' obj.id %}">edit</a>
+				<a class="btn btn-danger" href="{% url 'expenses:category-delete' obj.id %}">delete</a>
 			</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
+
+</div>
+</div>
 {% include "_pagination.html" %}
 {% endblock %}

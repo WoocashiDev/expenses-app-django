@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<form method="post" action="">
+<div class="row d-flex justify-content-center mt-5 mb-5">
+	<div class="col-6">
+    <h3 class="mb-5">Edit "{{object}}"</h3>
+<form class="generic-form" method="post" action="">
   {% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">save</button>
+  {% for field in form %}
+  <label for="exampleInputEmail1" class="form-label">{{field.label}}</label>
+  {{field}}
+  {% endfor %}
+  <button class="btn btn-primary mt-4" type="submit">save</button>
 </form>
+</div>
+</div>
 
 {% endblock %}

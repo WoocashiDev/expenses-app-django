@@ -1,27 +1,33 @@
-<div class="pagination">
-    <span class="pagination__nav">
+<div class="pagination d-block">
+    <div class="d-flex justify-content-center">
+    <ul class="pagination pagination__nav">
         {% if page_obj.has_previous %}
             {% if '?' in request.get_full_path %}
-            <a href="{{ request.get_full_path }}&page=1">&laquo; first</a>
-            <a href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}">previous</a>
+            <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page=1">&laquo; first</a></li>
+            <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}">previous</a></li>
             {% else %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+            <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
             {% endif %}
         {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+        
 
         {% if page_obj.has_next %}
             {% if '?' in request.get_full_path %}
-            <a href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}">next</a>
-            <a href="{{ request.get_full_path }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}">next</a></li>
+                <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
             {% else %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
             {% endif %}
         {% endif %}
+    </ul>
+    </div>
+    <div class="d-flex justify-content-center">
+    <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
     </span>
+    </div>
 </div>

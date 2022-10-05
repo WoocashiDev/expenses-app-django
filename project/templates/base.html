@@ -3,11 +3,29 @@
   <head>
     <title>{% block meta_title %}Expenses app{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
-	<a href="{% url 'expenses:expense-list' %}">Expenses</a> | 
-	<a href="{% url 'expenses:category-list' %}">Categories</a> | 
-	<hr>
-    {% block content %}{% endblock %}
+    {% include 'navbar.html' %}
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+    
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script>
+    const generic_form = document.querySelector('.generic-form')
+    
+    if (generic_form) {
+      const input_fields = generic_form.querySelectorAll('input')
+
+      const select_field = generic_form.querySelector('select')
+
+      if (select_field) {
+        select_field.classList.add('form-control')
+      }
+      
+      input_fields.forEach((field)=>{field.classList.add('form-control')})
+    }
+  </script>
 </html>
