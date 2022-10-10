@@ -16,7 +16,7 @@ class Expense(models.Model):
     class Meta:
         ordering = ('-date', '-pk')
 
-    category = models.ForeignKey(Category, models.PROTECT, null=True, blank=True)
+    category = models.ForeignKey(Category, models.CASCADE, null=True, blank=True)
 
     name = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
