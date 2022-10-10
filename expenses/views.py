@@ -86,6 +86,8 @@ class ExpenseListView(ListView):
         request.META["QUERY_STRING"] = re.sub("(&|\?)page=(.)*", "", request.META.get("QUERY_STRING", ""))
         return super().setup(request, *args, **kwargs)
 
+    
+
 class CategoryListView(ListView):
     model = Category
     paginate_by = 5
