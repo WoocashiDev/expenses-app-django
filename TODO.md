@@ -1,10 +1,11 @@
 1. SETUP PROJECT
 
    Requirements:
+
    - python >= 3.10
    - django >= 4
    - sqlite
-   
+
    python manage.py migrate
    python manage.py loaddata fixtures.json
 
